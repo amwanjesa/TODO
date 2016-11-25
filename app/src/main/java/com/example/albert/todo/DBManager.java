@@ -34,15 +34,16 @@ public class DBManager {
         dbHelper.close();
     }
 
-    public void insert(String taskName, String notFinished){
+    public void insert(String taskName, String notFinished, String color){
         ContentValues contentValue = new ContentValues();
         contentValue.put(dbHelper.SUBJECT, taskName);
         contentValue.put(dbHelper.STATUS, notFinished);
+        contentValue.put(dbHelper.COLOR, color);
         database.insert(dbHelper.TABLE_NAME, null, contentValue);
     }
 
     public Cursor fetch(){
-        String[] columns  = new String[]{dbHelper._ID, dbHelper.SUBJECT, dbHelper.STATUS,};
+        String[] columns  = new String[]{dbHelper._ID, dbHelper.SUBJECT, dbHelper.STATUS, dbHelper.COLOR,};
         Cursor cursor = database.query(dbHelper.TABLE_NAME, columns, null, null,
                 null, null, null);
         if(cursor != null){
@@ -68,10 +69,19 @@ public class DBManager {
         Cursor cursor = database.rawQuery("SELECT "+ dbHelper.STATUS +" FROM  TASKS WHERE "+dbHelper.SUBJECT+"= '"+taskName+"'", null);
         return cursor;
     }
+
+    public Cursor getColor(String taskName){
+        Cursor cursor = database.rawQuery("SELECT "+ dbHelper.COLOR +" FROM  TASKS WHERE "+dbHelper.SUBJECT+"= '"+taskName+"'", null);
+        return cursor;
+    }
+
     public void setStatus(String taskName, String status){
         database.execSQL("UPDATE " + dbHelper.TABLE_NAME + " SET status='"+ status +"' WHERE task='"+ taskName +"'");
     }
 
+    public void setColor(String taskName, String color){
+        database.execSQL("UPDATE " + dbHelper.TABLE_NAME + " SET color='"+ color +"' WHERE task='"+ taskName +"'");
+    }
 
     public void delete(String taskName){
         database.delete(dbHelper.TABLE_NAME, "task = ?", new String[]{taskName});

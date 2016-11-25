@@ -50,7 +50,7 @@ public class TODOActivity extends AppCompatActivity {
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tasks);
         lv.setAdapter(adapter);
-        displayDoneTasks();
+        //displayDoneTasks();
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
             @Override
@@ -77,9 +77,11 @@ public class TODOActivity extends AppCompatActivity {
                 if(status.equals("done")){
                     lv.getChildAt(position).setBackgroundColor(Color.WHITE);
                     dbManager.setStatus(task, "pending");
+                    dbManager.setColor(task, "white");
                 }else{
                     lv.getChildAt(position).setBackgroundColor(Color.GREEN);
                     dbManager.setStatus(task, "done");
+                    dbManager.setColor(task, "green");
                 }
 
                 tasks.clear();
@@ -92,42 +94,30 @@ public class TODOActivity extends AppCompatActivity {
 
     public void addTask(View view){
         EditText newTask = (EditText) findViewById(R.id.new_item);
-        dbManager.insert(newTask.getText().toString(), "pending");
+        dbManager.insert(newTask.getText().toString(), "pending", "white");
         Log.d("ins", "Insert task: " + newTask.getText().toString());
         tasks.clear();
         readFromDB();
         adapter.notifyDataSetChanged();
-        displayDoneTasks();
+        //displayDoneTasks();
     }
 
-    private void displayDoneTasks(){
-        for(int index: taskDone){
-            int itemCount = lv.getAdapter().getCount();
-            for (int i = 0; i < itemCount; i++) {
-                String task = lv.getAdapter().getItem(i).toString();
-                if(task.equals(tasks.get(index))){
-                    lv.getChildAt(i).setBackgroundColor(Color.GREEN);
-                }
-            }
-        }
-
-    }
-
-
-
-//    @Override
-//    protected void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        outState.putStringArrayList("tasks", tasks);
-//        String[] values = adapter.ge
-//        outState.putStringArray("myKey", values);
-//    }
+//    private void displayDoneTasks(){
+//        int taskCount = lv.getCount();
+//        for(int i = 0; i < taskCount; i++){
+//            String task = lv.getItemAtPosition(i).toString();
+//            Cursor colorCursor = dbManager.getColor(task);
+//            colorCursor.moveToFirst();
 //
-//    @Override
-//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-//        super.onRestoreInstanceState(savedInstanceState);
-//        tasks = savedInstanceState.getStringArrayList("tasks");
+//            String color = colorCursor.getString(colorCursor.getColumnIndexOrThrow("color"));
+//            if(color.equals("green")){
+//                lv.getChildAt(i).setBackgroundColor(Color.GREEN);
+//            }
+//        }
+//
 //    }
+
+
 
     @Override
     protected void onDestroy() {
@@ -157,55 +147,6 @@ public class TODOActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        setContentView(R.layout.activity_todo);
-        // getTasksFromDB();
-        readFromDB();
-        lv = (ListView) findViewById(R.id.list_view);
-
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tasks);
-        lv.setAdapter(adapter);
-        displayDoneTasks();
-        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view,
-                                           int position, long id) {
-                String taskName =(String) (lv.getItemAtPosition(position));
-                dbManager.delete(taskName);
-                tasks.clear();
-                readFromDB();
-                adapter.notifyDataSetChanged();
-                return true;
-            }
-        });
-
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                String task = (String) lv.getItemAtPosition(position);
-                Cursor cursor = dbManager.getStatus(task);
-                cursor.moveToFirst();
-
-                Log.d("col_names", Arrays.toString(cursor.getColumnNames()));
-                String status = cursor.getString(cursor.getColumnIndexOrThrow("status"));
-                if(status.equals("done")){
-                    lv.getChildAt(position).setBackgroundColor(Color.WHITE);
-                    dbManager.setStatus(task, "pending");
-                }else{
-                    lv.getChildAt(position).setBackgroundColor(Color.GREEN);
-                    dbManager.setStatus(task, "done");
-                }
-
-                tasks.clear();
-                readFromDB();
-                adapter.notifyDataSetChanged();
-
-            }
-        });
-    }
 
 //    private void getTasksFromDB(){
 //        tasks = new ArrayList<String>();
