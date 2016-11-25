@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\albert\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.0.0\support-annotations-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="a22d2cc94da87b254451fa8ed28afc30b4653773">
+        <dex dex="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\pre-dexed\debug\support-annotations-25.0.0_792809ff43811e1607f1eb101287ba6cabaf4d75.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
+        <dex dex="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.0_5cd9037dab56051064d2f3b209686993c207d9b9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="76fb65a4b41ea42dab8a1310ed772a2420c96b52">
+        <dex dex="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.0.0_05851777c196b1f78812d6943f2956b3a8f79b69.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="75b1f366ff0bbc78f8b1f7cf0dc82e7c53afef6a">
+        <dex dex="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.0.0_d80f24b9dfeb0ecbed1a0a4c4fdd0a67dc016058.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="f2e3b9bc1ec25f652e8007ce7774c991e38f6a00">
+        <dex dex="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.0_37e85353665e52401e04553864e9f744531f0d25.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="3b61a70884adaf0be3fc06c70c801e3e6df13133">
+        <dex dex="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.0_99219ab0d0ef9eac6877bd4eee6bbbd4ac4158fe.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-25.0.0_06035add81ca524b6f33f420c59edb0fdd5fe660.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="8bc45ce1f63d1a391fd38b32a201be5a42f9c95d">
+        <dex dex="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-25.0.0_39961c31e2d37a1b7151c50e55bc0422ce99eae6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="665d21a8a069c96b4d9e8b434f5096d865b4e261">
+        <dex dex="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.0_60c15f8b61275cc1b303dc0f7ef0bbd786c465cd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="ee5faf4dee5b6a4364bf51587871047dde7c703a">
+        <dex dex="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\pre-dexed\debug\internal_impl-25.0.0_e19b51f9ca5eebaad39c700cfca1321aff161065.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="07daa0b6e1d455c82a38422ffe287c18823d339a">
+        <dex dex="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-25.0.0_0a77124a61df175e74ab56e53b34fd83ed4793d1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="26674000177e45447a0326a6ad84612761199a13">
+        <dex dex="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.0.0_6fdf22811c60f3777ef44dc71f7338b033a8b465.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="53a420cd4f49274db6bd43475f8006ba67ef6bbd">
+        <dex dex="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-25.0.0_1b83b635f040c4b8ddf9fab40bebd2939dbfd3ab.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="4ccbcda5c72027c7f7c14be9ff8640d9cb0d8da0">
+        <dex dex="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-utils-25.0.0_f9d5619b78317dfda3c4bb62f72dfc515c2a0fa4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="d29714cc76b38157e3cbd034c66e1ec808eb4c19">
+        <dex dex="C:\Users\albert\AndroidStudioProjects\TODO\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-25.0.0_1cd28a8b001eb5b6e44baef8756fba3542c8250f.jar" />
+    </item>
+
+</items>
