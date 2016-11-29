@@ -50,7 +50,7 @@ public class ListsActivity extends AppCompatActivity {
         manager = ToDoManager.getInstance();
 
         // getTasksFromDB();
-        readFromDB();
+        // readFromDB();
         lv = (ListView) findViewById(R.id.list_view);
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tasks);
@@ -61,10 +61,8 @@ public class ListsActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view,
                                            int position, long id) {
-                String taskName =(String) (lv.getItemAtPosition(position));
-                dbManager.delete(taskName);
-                tasks.clear();
-                readFromDB();
+                String listName =(String) (lv.getItemAtPosition(position));
+                manager.deleteFromToDoList(tasks.indexOf(listName));
                 adapter.notifyDataSetChanged();
                 return true;
             }
@@ -73,36 +71,17 @@ public class ListsActivity extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                String task = (String) lv.getItemAtPosition(position);
-                Cursor cursor = dbManager.getStatus(task);
-                cursor.moveToFirst();
-
-                Log.d("col_names", Arrays.toString(cursor.getColumnNames()));
-                String status = cursor.getString(cursor.getColumnIndexOrThrow("status"));
-                if(status.equals("done")){
-                    lv.getChildAt(position).setBackgroundColor(Color.TRANSPARENT);
-                    dbManager.setStatus(task, "pending");
-                    dbManager.setColor(task, "white");
-                }else{
-                    lv.getChildAt(position).setBackgroundColor(Color.BLUE);
-                    dbManager.setStatus(task, "done");
-                    dbManager.setColor(task, "green");
-                }
-
-                tasks.clear();
-                readFromDB();
-                adapter.notifyDataSetChanged();
+                String listName = (String) lv.getItemAtPosition(position);
+                ToDoList nextToDoList = manager.getTodoList(tasks.indexOf(listName));
 
             }
         });
     }
 
     public void addTask(View view){
-        EditText newTask = (EditText) findViewById(R.id.new_item);
-        dbManager.insert(newTask.getText().toString(), "pending", "white");
-        Log.d("ins", "Insert task: " + newTask.getText().toString());
-        tasks.clear();
-        readFromDB();
+        EditText newList = (EditText) findViewById(R.id.new_item);
+        ToDoList newToDoList = new ToDoList(newList.getText().toString());
+        manager.addToDoList(newToDoList);
         adapter.notifyDataSetChanged();
         //displayDoneTasks();
     }
@@ -137,6 +116,13 @@ public class ListsActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    public void getListsFromManager(){
+        ArrayList<ToDoList> toDoLists = manager.getToDoLists();
+        for (ToDoList taskList : toDoLists){
+            tasks.add(taskList.getListTitle());
+        }
+    }
+
     public void saveToStorage(String fileName){
         FileOutputStream fos;
         ObjectOutputStream ous=null;
@@ -169,25 +155,25 @@ public class ListsActivity extends AppCompatActivity {
         }
     }
 
-    private void readFromDB() {
-
-        dbManager = new DBManager(this);
-        dbManager.open();
-        Cursor cursor = dbManager.fetch();
-        if(cursor != null){
-            if (cursor.moveToFirst()){
-                do{
-                    String task = cursor.getString(cursor.getColumnIndex("task"));
-                    String done = cursor.getString(cursor.getColumnIndex("status"));
-                    tasks.add(task);
-                    if(done.equals("done")){
-                        taskDone.add(tasks.indexOf(task));
-                    }
-                }while(cursor.moveToNext());
-            }
-            cursor.close();
-        }
-    }
+//    private void readFromDB() {
+//
+//        dbManager = new DBManager(this);
+//        dbManager.open();
+//        Cursor cursor = dbManager.fetch();
+//        if(cursor != null){
+//            if (cursor.moveToFirst()){
+//                do{
+//                    String task = cursor.getString(cursor.getColumnIndex("task"));
+//                    String done = cursor.getString(cursor.getColumnIndex("status"));
+//                    tasks.add(task);
+//                    if(done.equals("done")){
+//                        taskDone.add(tasks.indexOf(task));
+//                    }
+//                }while(cursor.moveToNext());
+//            }
+//            cursor.close();
+//        }
+//    }
 
 
 //    private void getTasksFromDB(){

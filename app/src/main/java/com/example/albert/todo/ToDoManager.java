@@ -35,6 +35,10 @@ public class ToDoManager implements Serializable{
         toDoLists.add(newList);
     }
 
+    public void deleteFromToDoList(int index){
+        toDoLists.remove(index);
+    }
+
     public void deleteFromToDoList(ToDoList deletedList){
         toDoLists.remove(deletedList);
     }
@@ -45,5 +49,9 @@ public class ToDoManager implements Serializable{
 
     public void setToDoLists(ArrayList<ToDoList> newLists){
         toDoLists = newLists;
+    }
+
+    public ToDoList getTodoList(int index){
+        return toDoLists.get(index);
     }
 }
