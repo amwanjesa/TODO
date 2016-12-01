@@ -33,8 +33,8 @@ public class ToDoList implements Serializable{
         toDOs.add(newTask);
     }
 
-    public ArrayList<ToDoItem>getToDoList(){
-        return this.toDOs;
+    public void deleteItem(int index){
+        toDOs.remove(index);
     }
 
 }

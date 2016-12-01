@@ -1,8 +1,7 @@
 package com.example.albert.todo;
 
 import android.app.Activity;
-import android.database.Cursor;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +19,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,7 +27,7 @@ import java.util.List;
 
 public class ListsActivity extends AppCompatActivity {
 
-
+    private static final String FILENAME = "toDoStorage";
     private DBManager dbManager;
 
     private ArrayAdapter<String> adapter;
@@ -45,12 +43,16 @@ public class ListsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_todo);
+        setContentView(R.layout.activity_lists);
 
         manager = ToDoManager.getInstance();
 
         // getTasksFromDB();
-        // readFromDB();
+        readFromStorage();
+        if(manager == null){
+            manager = ToDoManager.getInstance();
+        }
+        getListsFromManager();
         lv = (ListView) findViewById(R.id.list_view);
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tasks);
@@ -63,6 +65,8 @@ public class ListsActivity extends AppCompatActivity {
                                            int position, long id) {
                 String listName =(String) (lv.getItemAtPosition(position));
                 manager.deleteFromToDoList(tasks.indexOf(listName));
+                tasks.clear();
+                getListsFromManager();
                 adapter.notifyDataSetChanged();
                 return true;
             }
@@ -73,15 +77,20 @@ public class ListsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 String listName = (String) lv.getItemAtPosition(position);
                 ToDoList nextToDoList = manager.getTodoList(tasks.indexOf(listName));
+                Intent toDoListIntent = new Intent(ListsActivity.this, ToDoActivity.class);
+                toDoListIntent.putExtra("listToDo", nextToDoList);
+                startActivity(toDoListIntent);
 
             }
         });
     }
 
-    public void addTask(View view){
-        EditText newList = (EditText) findViewById(R.id.new_item);
+    public void addList(View view){
+        EditText newList = (EditText) findViewById(R.id.new_list);
         ToDoList newToDoList = new ToDoList(newList.getText().toString());
         manager.addToDoList(newToDoList);
+        tasks.clear();
+        getListsFromManager();
         adapter.notifyDataSetChanged();
         //displayDoneTasks();
     }
@@ -110,8 +119,7 @@ public class ListsActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-
-        dbManager.close();
+        saveToStorage();
 
         super.onDestroy();
     }
@@ -119,17 +127,20 @@ public class ListsActivity extends AppCompatActivity {
     public void getListsFromManager(){
         ArrayList<ToDoList> toDoLists = manager.getToDoLists();
         for (ToDoList taskList : toDoLists){
+            Log.d("getting todos", taskList.getListTitle());
             tasks.add(taskList.getListTitle());
         }
     }
 
-    public void saveToStorage(String fileName){
+
+
+    public void saveToStorage(){
         FileOutputStream fos;
         ObjectOutputStream ous=null;
         try {
-            fos = getApplicationContext().openFileOutput(fileName, Activity.MODE_PRIVATE);
+            fos = getApplicationContext().openFileOutput(FILENAME, Activity.MODE_PRIVATE);
             ous=new ObjectOutputStream(fos);
-            ous.writeObject(manager.getToDoLists());
+            ous.writeObject(manager);
             ous.flush();
             ous.close();
             fos.close();
@@ -138,13 +149,12 @@ public class ListsActivity extends AppCompatActivity {
         }
     }
 
-    public void readFromStorage(String fileName){
+    public void readFromStorage(){
         FileInputStream fis;
         try {
-            fis = getApplicationContext().openFileInput(fileName);
+            fis = getApplicationContext().openFileInput(FILENAME);
             ObjectInputStream oi = new ObjectInputStream(fis);
-            ArrayList<ToDoList> newToDoList = (ArrayList<ToDoList>) oi.readObject();
-            manager.setToDoLists(newToDoList);
+            manager = (ToDoManager) oi.readObject();
             oi.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
