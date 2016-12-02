@@ -26,7 +26,7 @@ public class ToDoActivity extends AppCompatActivity {
     private ToDoList todoS;
     private String FILENAME;
     private ArrayList<String> tasks = new ArrayList<String>();
-    private ArrayAdapter<String> adapter;
+    private ToDoArrayAdapter adapter;
     private ListView lv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class ToDoActivity extends AppCompatActivity {
         getItemsFromList();
         lv = (ListView) findViewById(R.id.list_view);
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tasks);
+        adapter = new ToDoArrayAdapter(this, todoS.getTasksInList());
         lv.setAdapter(adapter);
         //displayDoneTasks();
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -51,8 +51,8 @@ public class ToDoActivity extends AppCompatActivity {
                                            int position, long id) {
                 String listName =(String) (lv.getItemAtPosition(position));
                 todoS.deleteItem(position);
-                tasks.clear();
-                getItemsFromList();
+                //tasks.clear();
+                //getItemsFromList();
                 adapter.notifyDataSetChanged();
                 return true;
             }
@@ -61,8 +61,7 @@ public class ToDoActivity extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                String listName = (String) lv.getItemAtPosition(position);
-                ToDoItem clickedItem = todoS.getTasksInList().get(position);
+                ToDoItem clickedItem = (ToDoItem) lv.getItemAtPosition(position);
                 if (clickedItem.isDone()){
                     lv.getChildAt(position).setBackgroundColor(Color.TRANSPARENT);
                     clickedItem.setDone(false);

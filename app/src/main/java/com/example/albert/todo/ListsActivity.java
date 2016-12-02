@@ -28,7 +28,6 @@ import java.util.List;
 public class ListsActivity extends AppCompatActivity {
 
     private static final String FILENAME = "toDoStorage";
-    private DBManager dbManager;
 
     private ArrayAdapter<String> adapter;
 
@@ -140,7 +139,7 @@ public class ListsActivity extends AppCompatActivity {
         try {
             fos = getApplicationContext().openFileOutput(FILENAME, Activity.MODE_PRIVATE);
             ous=new ObjectOutputStream(fos);
-            ous.writeObject(manager);
+            ous.writeObject(manager.getToDoLists());
             ous.flush();
             ous.close();
             fos.close();
@@ -154,7 +153,8 @@ public class ListsActivity extends AppCompatActivity {
         try {
             fis = getApplicationContext().openFileInput(FILENAME);
             ObjectInputStream oi = new ObjectInputStream(fis);
-            manager = (ToDoManager) oi.readObject();
+            ArrayList<ToDoList> newToDoList = (ArrayList<ToDoList>) oi.readObject();
+            manager.setToDoLists(newToDoList);
             oi.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
