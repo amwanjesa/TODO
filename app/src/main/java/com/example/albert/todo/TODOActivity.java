@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -49,8 +50,7 @@ public class ToDoActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view,
                                            int position, long id) {
-                String listName =(String) (lv.getItemAtPosition(position));
-                todoS.deleteItem(position);
+                todoS.getTasksInList().remove(position);
                 //tasks.clear();
                 //getItemsFromList();
                 adapter.notifyDataSetChanged();
@@ -85,9 +85,15 @@ public class ToDoActivity extends AppCompatActivity {
 
     public void addToDoItem(View view){
         EditText newItem = (EditText) findViewById(R.id.new_todo_item);
-        ToDoItem newToDoList = new ToDoItem(newItem.getText().toString());
-        todoS.addToDOItem(newToDoList);
+        String newToDoItem = newItem.getText().toString();
+        if (newToDoItem.length() > 0){
+            ToDoItem newToDoList = new ToDoItem(newToDoItem);
+            todoS.addToDOItem(newToDoList);
+        }else{
+            Toast.makeText(this, R.string.item_zero_len_toast, Toast.LENGTH_SHORT).show();
+        }
         tasks.clear();
+        newItem.setText("");
         getItemsFromList();
         adapter.notifyDataSetChanged();
         //displayDoneTasks();

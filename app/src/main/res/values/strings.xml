@@ -3,4 +3,7 @@
     <string name="remove_item">Long press on item to remove it.</string>
     <string name="task_hint">New Task</string>
     <string name="empty_list">There are no tasks to display. Add one!</string>
+    <string name="item_zero_len_toast">Please enter a new item to do!</string>
+    <string name="category_hint">New Category</string>
+    <string name="category_zero_length_toast">Please enter a new category to add!</string>
 </resources>

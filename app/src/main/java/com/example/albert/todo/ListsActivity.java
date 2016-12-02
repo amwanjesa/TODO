@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -86,8 +87,14 @@ public class ListsActivity extends AppCompatActivity {
 
     public void addList(View view){
         EditText newList = (EditText) findViewById(R.id.new_list);
-        ToDoList newToDoList = new ToDoList(newList.getText().toString());
-        manager.addToDoList(newToDoList);
+        String newListToDo = newList.getText().toString();
+        if (newListToDo.length() > 0){
+            ToDoList newToDoList = new ToDoList(newListToDo);
+            manager.addToDoList(newToDoList);
+        }else{
+            Toast.makeText(this, R.string.category_zero_length_toast, Toast.LENGTH_SHORT).show();
+        }
+        newList.setText("");
         tasks.clear();
         getListsFromManager();
         adapter.notifyDataSetChanged();
